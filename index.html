@@ -323,6 +323,56 @@ select {
 }
 
 
+.chat-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  width: 360px;
+  max-width: 94vw;
+
+  background: rgba(10, 10, 10, 0.92) !important; /* mais escuro */
+  backdrop-filter: blur(8px);
+
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+
+  box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  transform: translateY(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all .25s ease;
+  z-index: 2000; /* SOBRE TUDO */
+}
+
+.chat-panel.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.chat-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+  z-index: 1500;
+}
+
+.chat-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
 </style>
 </head>
 <body>
