@@ -65,10 +65,14 @@ nav a:hover{background:rgba(255,255,255,0.03)}
   margin-top:86px;
 }
 .hero::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
-  mix-blend-mode:multiply;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.60), rgba(0,0,0,0.85)),
+    rgba(0,0,0,0.6);
 }
+
 .hero-left{width:60%;max-width:900px;z-index:2}
 .kicker{color:var(--neon);font-weight:700;letter-spacing:1px;margin-bottom:10px}
 .hero h2{font-size:64px;line-height:0.9;margin:0 0 18px;color:var(--white);text-shadow:0 8px 30px rgba(0,0,0,0.6)}
