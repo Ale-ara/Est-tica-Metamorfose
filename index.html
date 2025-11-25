@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Metamorfose • Estética Automotiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070707;
+  --card:#0f0f10;
+  --neon:#00ff40;
+  --neon-dark:#00cc35;
+  --muted:#a1a1a1;
+  --white:#ffffff;
+  --glass: rgba(255,255,255,0.03);
+  --accent-shadow: 0 12px 50px rgba(0,255,64,0.12);
+}
+*{box-sizing:border-box;font-family:'Poppins',sans-serif}
+html {scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh
+}
+
+/* ================= HEADER ================= */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:64px;height:64px;object-fit:contain;border-radius:50%;background:#000;padding:8px}
+.brand h1{font-size:18px;margin:0;letter-spacing:1px}
+nav{display:flex;gap:18px;align-items:center}
+nav a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:8px;
+  opacity:0.95
+}
+nav a:hover{background:rgba(255,255,255,0.03)}
+.btn-quote{
+  background:var(--neon);
+  color:#000;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  box-shadow:var(--accent-shadow)
+}
+
+/* ================= HERO ================= */
+.hero{
+  height:86vh;min-height:560px;display:flex;
+  align-items:center;justify-content:flex-start;
+  padding:0 6vw;position:relative;overflow:hidden;
+  margin-top:86px;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
+  mix-blend-mode:multiply;
+}
+.hero-left{width:60%;max-width:900px;z-index:2}
+.kicker{color:var(--neon);font-weight:700;letter-spacing:1px;margin-bottom:10px}
+.hero h2{font-size:64px;line-height:0.9;margin:0 0 18px;color:var(--white);text-shadow:0 8px 30px rgba(0,0,0,0.6)}
+.hero p{color:var(--muted);font-size:18px;margin-bottom:20px}
+.hero .cta{display:flex;gap:12px}
+.whatsapp-btn{
+  background:linear-gradient(90deg,var(--neon),var(--neon-dark));
+  color:#000;padding:14px 20px;border-radius:999px;
+  font-weight:800;text-decoration:none;
+  box-shadow:var(--accent-shadow)
+}
+.ghost{
+  background:rgba(255,255,255,0.03);
+  padding:14px 18px;border-radius:999px;
+  color:var(--white);text-decoration:none
+}
+
+/* HERO background */
+.hero-bg{
+  position:absolute;inset:0;
+  background-position:center;background-size:cover;
+  filter:contrast(1.05) saturate(1.2);
+  transform:scale(1.04);
+  transition:transform 0.9s ease;
+}
+.hero:hover .hero-bg{transform:scale(1.08)}
+
+/* ================= SECTIONS ================= */
+main{margin-top:0}
+section{padding:80px 6vw}
+.container{max-width:1100px;margin:0 auto}
+
+/* ABOUT */
+.about-grid{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.about-content{flex:1;min-width:300px}
+.about-photo{flex:0 0 420px;min-width:260px}
+.about-photo img{
+  width:100%;border-radius:12px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 10px 40px rgba(0,0,0,0.5)
+}
+
+/* SERVICES */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px
+}
+.service{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;padding:20px;
+  border:1px solid rgba(255,255,255,0.03);
+  min-height:130px
+}
+.service h4{margin:0 0 8px;color:var(--neon)}
+.service p{color:var(--muted);font-size:14px}
+
+/* GALLERY */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px
+}
+.gallery-item{position:relative;overflow:hidden;border-radius:10px}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;transform:scale(1.06);
+  transition:transform .8s cubic-bezier(.2,.9,.2,1)
+}
+.gallery-item:hover img{transform:scale(1.0)}
+.label{
+  position:absolute;left:12px;bottom:12px;
+  background:rgba(0,0,0,0.45);
+  padding:8px 10px;border-radius:8px;
+  color:var(--white);font-weight:600
+}
+
+/* CONTACT */
+.contact-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;padding:22px;
+  border:1px solid rgba(255,255,255,0.03)
+}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 320px;
+  gap:24px
+}
+.input, .textarea{
+  width:100%;padding:12px;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.04);
+  color:var(--white)!important
+}
+.send{
+  background:var(--neon);color:#000;
+  padding:12px 16px;border-radius:10px;
+  border:none;font-weight:800
+}
+
+/* FOOTER */
+footer{
+  padding:28px 6vw;border-top:1px solid rgba(255,255,255,0.03);
+  text-align:center;color:var(--muted)
+}
+
+/* ================= CHAT FLOAT ================= */
+.chat-toggle{
+  position:fixed;right:20px;bottom:22px;
+  background:var(--neon);
+  width:64px;height:64px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:var(--accent-shadow);z-index:1400
+}
+
+.chat-panel{
+  position:fixed;right:20px;bottom:100px;width:360px;
+  max-width:94vw;background:linear-gradient(180deg,
+  rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 20px 80px rgba(0,0,0,0.7);
+  display:flex;flex-direction:column;overflow:hidden;
+  transform:translateY(12px);opacity:0;pointer-events:none;
+  transition:all .25s;z-index:1400
+}
+
+.chat-panel.open{
+  transform:translateY(0);opacity:1;pointer-events:auto
+}
+
+.chat-header{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.chat-body{padding:12px;max-height:320px;overflow:auto}
+
+.msg{
+  margin:8px 0;padding:10px 12px;border-radius:10px;
+  max-width:84%
+}
+.bot{
+  background:linear-gradient(90deg,var(--glass), rgba(255,255,255,0.02));
+  color:var(--white);align-self:flex-start;
+  border:1px solid rgba(255,255,255,0.02)
+}
+.user{
+  background:linear-gradient(90deg, rgba(0,255,64,0.12), rgba(0,255,64,0.06));
+  color:#000;align-self:flex-end
+}
+
+.chat-footer{
+  padding:10px;border-top:1px solid rgba(255,255,255,0.02);
+  display:flex;gap:8px;align-items:center
+}
+
+/* ================= SELECT FIX — (CORREÇÃO COMPLETA) ================= */
+
+select,  
+.select,  
+.select.small {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  background:rgba(255,255,255,0.06)!important;
+  border:1px solid rgba(255,255,255,0.12)!important;
+
+  padding:10px 14px!important;
+  border-radius:8px!important;
+  color:var(--white)!important;
+
+  font-size:15px;
+  cursor:pointer;
+  width:100%;
+  height:44px!important;
+
+  outline:none!important;
+}
+
+/* remove setinha padrão do IE */
+select::-ms-expand{display:none}
+
+.select.small{
+  max-width:150px!important;
+}
+
+/* Focus */
+select:focus{
+  border-color:var(--neon)!important;
+  box-shadow:0 0 0 2px rgba(0,255,64,0.2)
+}
+
+/* ================= ANIMATION ================= */
+.reveal{
+  opacity:0;transform:translateY(24px) scale(.995);
+  transition:all .9s cubic-bezier(.2,.9,.2,1);
+  will-change:transform,opacity
+}
+.reveal.show{
+  opacity:1;transform:translateY(0) scale(1)
+}
+.reveal-left{
+  opacity:0;transform:translateX(-36px)
+}
+.reveal-left.show{
+  opacity:1;transform:translateX(0);
+  transition:all .9s cubic-bezier(.2,.9,.2,1)
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:900px){
+  .hero h2{font-size:46px}
+  .hero-left{width:100%}
+  .about-grid{flex-direction:column-reverse}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  header{padding:12px}
+  .brand img{width:52px;height:52px}
+  .hero h2{font-size:34px}
+  .hero{height:70vh}
+  nav{display:none}
+}
+select option {
+  background: #0b0b0b !important;
+  color: var(--white) !important;
+  padding: 12px;
+  border: none;
+}
+select {
+  background-color: #111 !important;
+  color: #fff !important;
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <!-- LOGO - seu arquivo enviado (mantive o caminho) -->
+    <img src="https://i.imgur.com/EN4ndEj.png" alt="Metamorfose logo">
+    <div>
+      <h1>Metamorfose</h1>
+      <div style="color:var(--muted);font-size:13px">Estética Automotiva & Motocicletas</div>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#home">Início</a>
+    <a href="#about">Sobre</a>
+    <a href="#services">Serviços</a>
+    <a href="#gallery">Galeria</a>
+    <a href="#contact">Contato</a>
+    <span class="spacer"></span>
+    <a class="btn-quote" href="#contact">Orçamento</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <!-- Imagem de fundo: a que você enviou (você pode trocar o caminho depois) -->
+  <div class="hero-bg" style="background-image: url('https://i.imgur.com/ItKF6LR.jpeg');"></div>
+
+  <div class="hero-left reveal" style="z-index:2">
+    <div class="kicker">Metamorfose Estética</div>
+    <h2>Transformamos veículos.<br><span style="color:var(--neon)">Recupere o brilho e a proteção.</span></h2>
+    <p>Polimento, vitrificação, higienização e serviços premium para carros e motos — com técnica, produto profissional e cuidado extremo nos detalhes.</p>
+
+    <div class="cta" style="margin-top:20px">
+      <a id="main-wa" class="whatsapp-btn" href="#">📲 Fazer Orçamento</a>
+      <a class="ghost" href="#gallery">Ver Galeria</a>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- SOBRE -->
+  <section id="about" class="reveal-left">
+    <div class="container about-grid">
+      <div class="about-content">
+        <h3 style="color:var(--neon);margin-top:0">Sobre a Metamorfose</h3>
+        <p style="color:var(--muted);font-size:16px;line-height:1.7">
+          A Metamorfose Estética Automotiva nasceu com o compromisso de transformar veículos através de um trabalho
+          técnico e meticuloso. Com experiência e paixão pelo detalhe, oferecemos polimento, vitrificação, higienização,
+          lavagem detalhada e serviços especializados para preservar e valorizar seu carro ou moto.
+        </p>
+
+        <p style="color:var(--muted);font-size:16px;line-height:1.7">
+          Nosso diferencial é o atendimento personalizado, uso de produtos profissionais e a busca por resultados que duram.
+          Cada veículo recebe um plano de serviço adequado ao estado da pintura, acabamento e desejo do cliente.
+        </p>
+
+        <ul style="color:var(--muted);font-size:15px;line-height:1.8;margin-top:12px">
+          <li><strong>Profissional:</strong> Atendimento qualificado com equipamentos modernos.</li>
+          <li><strong>Produtos premium:</strong> Proteção que aumenta a durabilidade da pintura.</li>
+          <li><strong>Atendimento para motos:</strong> Serviços adaptados para motocicletas também.</li>
+        </ul>
+      </div>
+
+      <div class="about-photo">
+        <!-- Substitua pela foto do seu tio quando tiver -->
+        <img src="https://i.imgur.com/DIPxhAI.png" alt="Foto do profissional">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="services" class="reveal">
+    <div class="container">
+      <h3 style="color:var(--neon);margin-top:0">Serviços</h3>
+      <p style="color:var(--muted);max-width:820px">Oferecemos uma gama completa de serviços para deixar seu veículo impecável — escolha o que precisa ou peça um orçamento personalizado.</p>
+
+      <div class="services-grid" style="margin-top:18px">
+        <div class="service glow">
+          <h4>Polimento Profissional</h4>
+          <p>Remoção de riscos leves, oxidação e recuperação do brilho original da pintura.</p>
+        </div>
+
+        <div class="service">
+          <h4>Vitrificação / Cristalização</h4>
+          <p>Proteção de alta durabilidade que facilita a limpeza e protege contra agentes externos.</p>
+        </div>
+
+        <div class="service">
+          <h4>Higienização Interna</h4>
+          <p>Limpeza profunda, descontaminação e desodorização do interior do veículo.</p>
+        </div>
+
+        <div class="service">
+          <h4>Lavagem Detalhada</h4>
+          <p>Lavagem manual técnica, secagem correta e finalização com produtos profissionais.</p>
+        </div>
+
+        <div class="service">
+          <h4>Descontaminação e Clay</h4>
+          <p>Remoção de impurezas da pintura para preparar o veículo para polimento ou vitrificação.</p>
+        </div>
+
+        <div class="service">
+          <h4>Espelhamento / Finalização</h4>
+          <p>Acabamento de alto brilho para clientes que buscam o máximo em estética automotiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="gallery" class="reveal">
+    <div class="container">
+      <h3 style="color:var(--neon);margin-top:0">Galeria — Antes & Depois</h3>
+      <p style="color:var(--muted)">Clique nas imagens para abrir maior (substitua pelos before/after reais).</p>
+
+      <div class="gallery-grid" style="margin-top:16px">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1542367597-38b7d8a9b0f8?q=80&w=1200&auto=format&fit=crop" alt="antes">
+          <div class="label">Antes — Sedan</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1511396263009-3f2b6f0f3b3b?q=80&w=1200&auto=format&fit=crop" alt="depois">
+          <div class="label">Depois — Sedan</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop" alt="antes-moto">
+          <div class="label">Antes — Moto</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1542367597-38b7d8a9b0f8?q=80&w=1200&auto=format&fit=crop" alt="depois-moto">
+          <div class="label">Depois — Moto</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contact" class="reveal">
+    <div class="container">
+      <h3 style="color:var(--neon);margin-top:0">Contato</h3>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:320px">
+          <div class="contact-card">
+            <p style="color:var(--muted);margin:0 0 8px">Quer um orçamento? Mande uma mensagem no WhatsApp ou preencha o formulário abaixo.</p>
+            <p style="margin:8px 0"><strong>WhatsApp:</strong> <a style="color:var(--neon)" href="https://wa.me/5521997542765"> (21) 99754-2765</a></p>
+            <p style="margin:0"><strong>Email:</strong> <span style="color:var(--muted)">metamorfose_estetica@hotmail.com</span></p>
+            <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:14px 0">
+            <form id="contactForm">
+              <input class="input" id="cname" placeholder="Seu nome" />
+              <input class="input" id="cphone" placeholder="Telefone" style="margin-top:10px"/>
+              <textarea class="textarea" id="cmessage" rows="4" placeholder="Mensagem" style="margin-top:10px"></textarea>
+              <div style="display:flex;gap:10px;margin-top:12px">
+                <button type="button" class="send" id="sendContact">Enviar via WhatsApp</button>
+                <button type="reset" class="ghost" style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--white)">Limpar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div style="width:360px;min-width:260px">
+          <iframe style="width:100%;height:260px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.0000000000005!2d-43.00000000000001!3d-22.900000000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDU0JzAwLjAiUyA0M8KwMDAnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v0000000000000"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CHATBOT -->
+<div class="chat-toggle" id="chatToggle">💬</div>
+
+<div class="chat-panel" id="chatPanel" aria-hidden="true">
+  <div class="chat-header">
+    <strong>Assistente Metamorfose</strong>
+  </div>
+
+  <div class="chat-body" id="chatBody">
+    <div class="msg bot">Olá! 👋 Eu sou o assistente. Você quer orçamento para carro ou moto?</div>
+  </div>
+
+  <div class="chat-footer">
+    <div style="width:100%">
+      <div style="display:flex;gap:8px">
+        <select id="vehicleType" class="select small">
+          <option value="">Tipo</option>
+          <option value="Carro">Carro</option>
+          <option value="Moto">Moto</option>
+        </select>
+        <select id="serviceSelect" class="select small">
+          <option value="">Serviço</option>
+          <option>Polimento</option>
+          <option>Vitrificação</option>
+          <option>Higienização Interna</option>
+          <option>Lavagem Detalhada</option>
+          <option>Descontaminação</option>
+          <option>Espelhamento</option>
+        </select>
+      </div>
+
+      <div style="margin-top:8px">
+        <select id="modelSelect" class="select">
+          <option value="">Selecione o modelo</option>
+        </select>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="customerName" class="input" placeholder="Seu nome (opcional)"/>
+        <button id="sendBtn" class="btn-send" style="background:var(--neon);color:#000;border:none;">Abrir WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:12px">
+    <div style="color:var(--muted)">&copy; Metamorfose Estética Automotiva</div>
+    <div style="color:var(--muted)">📞 (21) 99754-2765 • ✉ metamorfose_estetica@hotmail.com</div>
+  </div>
+</footer>
+
+<script>
+  // CONFIG
+  const WA_NUMBER = "5521997542765"; // +55 21 99754-2765
+  const MODELS = {
+    "Carro": [
+      "Fiat - Uno","Fiat - Strada","Fiat - Cronos","Fiat - Argo",
+      "VW - Gol","VW - Polo","VW - T-Cross","Chevrolet - Onix",
+      "Chevrolet - S10","Ford - Ka","Hyundai - HB20","Honda - Civic","Toyota - Corolla"
+    ],
+    "Moto": [
+      "Honda - CG 160","Honda - Titan 150","Honda - Bros 160","Honda - XRE 300",
+      "Yamaha - Fazer 250","Yamaha - Lander 250","Suzuki - GSX","BMW - G 310"
+    ]
+  };
+
+  // Smooth reveal with IntersectionObserver
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        // optional: unobserve for performance after shown
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.18});
+
+  // add reveal to elements
+  document.querySelectorAll('.reveal, .reveal-left, .hero-left').forEach(el => {
+    io.observe(el);
+  });
+
+  // NAV active on scroll
+  const sections = document.querySelectorAll('main section, #home');
+  const navLinks = document.querySelectorAll('header nav a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = document.querySelector('header nav a[href="#' + id + '"]');
+      if(entry.isIntersecting){
+        navLinks.forEach(a=>a.style.opacity=0.8);
+        if(link) link.style.opacity = 1;
+      }
+    });
+  }, {threshold: 0.38});
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // HERO subtle parallax on mouse move (desktop)
+  const hero = document.querySelector('.hero');
+  const bg = document.querySelector('.hero-bg');
+  if(hero && bg){
+    hero.addEventListener('mousemove', (e)=>{
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      bg.style.transform = `translate(${x*6}px, ${y*6}px) scale(1.06)`;
+    });
+    hero.addEventListener('mouseleave', ()=> bg.style.transform = 'translate(0px,0px) scale(1.04)');
+  }
+
+  // Chat and WhatsApp logic
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPanel = document.getElementById('chatPanel');
+  const vehicleType = document.getElementById('vehicleType');
+  const modelSelect = document.getElementById('modelSelect');
+  const serviceSelect = document.getElementById('serviceSelect');
+  const sendBtn = document.getElementById('sendBtn');
+  const chatBody = document.getElementById('chatBody');
+  const mainWa = document.getElementById('main-wa');
+  const customerName = document.getElementById('customerName');
+
+  chatToggle.addEventListener('click', ()=> chatPanel.classList.toggle('open'));
+
+  // populate models on type change
+  vehicleType.addEventListener('change', (e)=>{
+    const v = e.target.value;
+    modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
+    if(MODELS[v]) MODELS[v].forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m; opt.textContent = m;
+      modelSelect.appendChild(opt);
+    });
+    pushBotMessage(`Você escolheu: ${v || '—'}. Agora selecione o serviço e o modelo.`);
+  });
+
+  function pushBotMessage(text){
+    const d = document.createElement('div');
+    d.className = 'msg bot';
+    d.innerText = text;
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+  function pushUserMessage(text){
+    const d = document.createElement('div');
+    d.className = 'msg user';
+    d.innerText = text;
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function openWhatsappFromState(){
+    const tipo = vehicleType.value || 'Não informado';
+    const serv = serviceSelect.value || 'Serviço não escolhido';
+    const modelo = modelSelect.value || 'Modelo não informado';
+    const nome = (customerName.value || '').trim();
+
+    pushUserMessage(`${serv} • ${tipo} • ${modelo}`);
+    pushBotMessage('Beleza — vou preparar a mensagem e abrir o WhatsApp.');
+
+    let msg = `Olá! Tenho interesse em *${serv}*.\nTipo: *${tipo}*\nModelo: *${modelo}*`;
+    if(nome) msg += `\nNome: ${nome}`;
+    msg += `\n\nVim pelo site/landing. Gostaria de um orçamento, por favor.`;
+
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  sendBtn.addEventListener('click', openWhatsappFromState);
+  if(mainWa) mainWa.addEventListener('click', (e)=>{ e.preventDefault(); openWhatsappFromState(); });
+
+  // Contact form -> WhatsApp
+  document.getElementById('sendContact').addEventListener('click', () => {
+    const nome = document.getElementById('cname').value.trim();
+    const fone = document.getElementById('cphone').value.trim();
+    const msg = document.getElementById('cmessage').value.trim();
+    let text = `Olá! Gostaria de um orçamento.\n`;
+    if(nome) text += `Nome: ${nome}\n`;
+    if(fone) text += `Telefone: ${fone}\n`;
+    if(msg) text += `Mensagem: ${msg}\n`;
+    text += `\nVim pelo site.`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+  });
+
+  // small UX: open gallery image in new tab when clicked
+  document.querySelectorAll('.gallery-item img').forEach(img=>{
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', ()=> window.open(img.src, '_blank'));
+  });
+
+  // initial small prompts
+  setTimeout(()=> pushBotMessage("Escolha o tipo do veículo, serviço e modelo para enviar o orçamento."), 900);
+
+</script>
+</body>
+</html>
