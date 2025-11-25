@@ -648,8 +648,16 @@ select {
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
-  sendBtn.addEventListener('click', openWhatsappFromState);
-  if(mainWa) mainWa.addEventListener('click', (e)=>{ e.preventDefault(); openWhatsappFromState(); });
+if(mainWa) mainWa.addEventListener('click', (e)=>{ 
+    e.preventDefault();
+
+    // abre o chat do bot
+    chatPanel.classList.add('open');
+
+    // envia mensagem automática
+    pushBotMessage("Vamos lá! 😊 Escolha o tipo do veículo, o serviço e o modelo para iniciarmos seu orçamento.");
+});
+
 
   // Contact form -> WhatsApp
   document.getElementById('sendContact').addEventListener('click', () => {
