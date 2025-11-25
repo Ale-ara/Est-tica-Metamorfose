@@ -23,7 +23,8 @@ body{
   background:var(--bg);
   color:var(--white);
   -webkit-font-smoothing:antialiased;
-  min-height:100vh
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
 }
 
 /* ================= HEADER ================= */
@@ -71,6 +72,7 @@ nav a:hover{background:rgba(255,255,255,0.03)}
   background:
     linear-gradient(180deg, rgba(0,0,0,0.60), rgba(0,0,0,0.85)),
     rgba(0,0,0,0.6);
+  pointer-events:none;
 }
 
 .hero-left{width:60%;max-width:900px;z-index:2}
@@ -184,99 +186,70 @@ footer{
   background:var(--neon);
   width:64px;height:64px;border-radius:999px;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;box-shadow:var(--accent-shadow);z-index:1400
+  cursor:pointer;box-shadow:var(--accent-shadow);z-index:2400
 }
 
+/* default (desktop) chat panel */
 .chat-panel{
   position:fixed;right:20px;bottom:100px;width:360px;
-  max-width:94vw;background:linear-gradient(180deg,
-  rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+  max-width:94vw;background:rgba(10,10,10,0.92);
+  backdrop-filter: blur(8px);
+  border-radius:16px;border:1px solid rgba(255,255,255,0.06);
   box-shadow:0 20px 80px rgba(0,0,0,0.7);
   display:flex;flex-direction:column;overflow:hidden;
-  transform:translateY(12px);opacity:0;pointer-events:none;
-  transition:all .25s;z-index:1400
+  transform:translateY(16px);opacity:0;pointer-events:none;
+  transition:all .25s;z-index:2600;
 }
-
-.chat-panel.open{
-  transform:translateY(0);opacity:1;pointer-events:auto
-}
-
+.chat-panel.open{transform:translateY(0);opacity:1;pointer-events:auto}
 .chat-header{padding:12px;border-bottom:1px solid rgba(255,255,255,0.03)}
 .chat-body{padding:12px;max-height:320px;overflow:auto}
+.msg{margin:8px 0;padding:10px 12px;border-radius:10px;max-width:84%}
+.bot{background:linear-gradient(90deg,var(--glass), rgba(255,255,255,0.02));color:var(--white);align-self:flex-start;border:1px solid rgba(255,255,255,0.02)}
+.user{background:linear-gradient(90deg, rgba(0,255,64,0.12), rgba(0,255,64,0.06));color:#000;align-self:flex-end}
+.chat-footer{padding:10px;border-top:1px solid rgba(255,255,255,0.02);display:flex;gap:8px;align-items:center}
 
-.msg{
-  margin:8px 0;padding:10px 12px;border-radius:10px;
-  max-width:84%
+/* backdrop when chat opens */
+.chat-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);opacity:0;pointer-events:none;transition:.25s;z-index:2500
 }
-.bot{
-  background:linear-gradient(90deg,var(--glass), rgba(255,255,255,0.02));
-  color:var(--white);align-self:flex-start;
-  border:1px solid rgba(255,255,255,0.02)
-}
-.user{
-  background:linear-gradient(90deg, rgba(0,255,64,0.12), rgba(0,255,64,0.06));
-  color:#000;align-self:flex-end
-}
-
-.chat-footer{
-  padding:10px;border-top:1px solid rgba(255,255,255,0.02);
-  display:flex;gap:8px;align-items:center
-}
+.chat-backdrop.show{opacity:1;pointer-events:auto}
 
 /* ================= SELECT FIX — (CORREÇÃO COMPLETA) ================= */
-
-select,  
-.select,  
-.select.small {
+select, .select, .select.small {
   appearance:none;
   -webkit-appearance:none;
   -moz-appearance:none;
-
   background:rgba(255,255,255,0.06)!important;
   border:1px solid rgba(255,255,255,0.12)!important;
-
   padding:10px 14px!important;
   border-radius:8px!important;
   color:var(--white)!important;
-
   font-size:15px;
   cursor:pointer;
   width:100%;
   height:44px!important;
-
   outline:none!important;
 }
-
-/* remove setinha padrão do IE */
 select::-ms-expand{display:none}
+.select.small{max-width:150px!important;}
+select:focus{border-color:var(--neon)!important;box-shadow:0 0 0 2px rgba(0,255,64,0.15)}
 
-.select.small{
-  max-width:150px!important;
-}
+/* style options (works in many browsers) */
+select option{background:#0b0b0b;color:var(--white);padding:8px;border:none}
 
-/* Focus */
-select:focus{
-  border-color:var(--neon)!important;
-  box-shadow:0 0 0 2px rgba(0,255,64,0.2)
-}
+/* ================= SCROLLBAR NEON SIMPLES ================= */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00ff40, #00cc35); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #00ff40; }
 
-/* ================= ANIMATION ================= */
-.reveal{
-  opacity:0;transform:translateY(24px) scale(.995);
-  transition:all .9s cubic-bezier(.2,.9,.2,1);
-  will-change:transform,opacity
-}
-.reveal.show{
-  opacity:1;transform:translateY(0) scale(1)
-}
-.reveal-left{
-  opacity:0;transform:translateX(-36px)
-}
-.reveal-left.show{
-  opacity:1;transform:translateX(0);
-  transition:all .9s cubic-bezier(.2,.9,.2,1)
-}
+/* ================= ANIMATIONS ================= */
+.reveal{opacity:0;transform:translateY(24px) scale(.995);transition:all .9s cubic-bezier(.2,.9,.2,1);will-change:transform,opacity}
+.reveal.show{opacity:1;transform:translateY(0) scale(1)}
+.reveal-left{opacity:0;transform:translateX(-36px)}
+.reveal-left.show{opacity:1;transform:translateX(0);transition:all .9s cubic-bezier(.2,.9,.2,1)}
+.glow{box-shadow:0 10px 40px rgba(0,255,64,0.12);border:1px solid rgba(0,255,64,0.08)}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:900px){
@@ -291,88 +264,18 @@ select:focus{
   .hero h2{font-size:34px}
   .hero{height:70vh}
   nav{display:none}
+
+  /* make chat centered and full width on small screens */
+  .chat-panel{
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    bottom: 80px !important;
+    max-width: calc(100% - 24px) !important;
+    border-radius: 14px !important;
+  }
+  .chat-body{max-height:56vh}
 }
-select option {
-  background: #0b0b0b !important;
-  color: var(--white) !important;
-  padding: 12px;
-  border: none;
-}
-select {
-  background-color: #111 !important;
-  color: #fff !important;
-}
-
-
-/* SCROLLBAR NEON SIMPLES */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00ff40, #00cc35);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #00ff40;
-}
-
-
-.chat-panel {
-  position: fixed;
-  right: 20px;
-  bottom: 100px;
-  width: 360px;
-  max-width: 94vw;
-
-  background: rgba(10, 10, 10, 0.92) !important; /* mais escuro */
-  backdrop-filter: blur(8px);
-
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.06);
-
-  box-shadow: 0 20px 80px rgba(0,0,0,0.7);
-
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  transform: translateY(16px);
-  opacity: 0;
-  pointer-events: none;
-  transition: all .25s ease;
-  z-index: 2000; /* SOBRE TUDO */
-}
-
-.chat-panel.open {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-.chat-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: .25s;
-  z-index: 1500;
-}
-
-.chat-backdrop.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
 </style>
 </head>
 <body>
@@ -380,8 +283,8 @@ select {
 <!-- HEADER -->
 <header>
   <div class="brand">
-    <!-- LOGO - seu arquivo enviado (mantive o caminho) -->
-    <img src="https://i.imgur.com/EN4ndEj.png" alt="Metamorfose logo">
+    <!-- LOGO local (arquivo que você enviou) -->
+    <img src="/mnt/data/D0DF8106-69B6-46D5-BB43-F69B5C302C72.jpeg" alt="Metamorfose logo">
     <div>
       <h1>Metamorfose</h1>
       <div style="color:var(--muted);font-size:13px">Estética Automotiva & Motocicletas</div>
@@ -401,8 +304,8 @@ select {
 
 <!-- HERO -->
 <section id="home" class="hero">
-  <!-- Imagem de fundo: a que você enviou (você pode trocar o caminho depois) -->
-  <div class="hero-bg" style="background-image: url('https://i.imgur.com/ItKF6LR.jpeg');"></div>
+  <!-- Hero background (arquivo que você enviou) -->
+  <div class="hero-bg" style="background-image: url('/mnt/data/53322abd-18dd-4b39-abdc-75147de051ac.png');"></div>
 
   <div class="hero-left reveal" style="z-index:2">
     <div class="kicker">Metamorfose Estética</div>
@@ -549,8 +452,11 @@ select {
 
 </main>
 
+<!-- CHAT BACKDROP (must be before panel for z-index order) -->
+<div id="chatBackdrop" class="chat-backdrop"></div>
+
 <!-- CHATBOT -->
-<div class="chat-toggle" id="chatToggle">💬</div>
+<div class="chat-toggle" id="chatToggle" title="Atendimento">💬</div>
 
 <div class="chat-panel" id="chatPanel" aria-hidden="true">
   <div class="chat-header">
@@ -622,16 +528,13 @@ select {
     entries.forEach(entry => {
       if(entry.isIntersecting){
         entry.target.classList.add('show');
-        // optional: unobserve for performance after shown
         io.unobserve(entry.target);
       }
     });
   }, {threshold: 0.18});
 
   // add reveal to elements
-  document.querySelectorAll('.reveal, .reveal-left, .hero-left').forEach(el => {
-    io.observe(el);
-  });
+  document.querySelectorAll('.reveal, .reveal-left, .hero-left').forEach(el => io.observe(el));
 
   // NAV active on scroll
   const sections = document.querySelectorAll('main section, #home');
@@ -648,6 +551,7 @@ select {
   }, {threshold: 0.38});
   sections.forEach(s => sectionObserver.observe(s));
 
+
   // HERO subtle parallax on mouse move (desktop)
   const hero = document.querySelector('.hero');
   const bg = document.querySelector('.hero-bg');
@@ -661,9 +565,10 @@ select {
     hero.addEventListener('mouseleave', ()=> bg.style.transform = 'translate(0px,0px) scale(1.04)');
   }
 
-  // Chat and WhatsApp logic
+  // Chat logic
   const chatToggle = document.getElementById('chatToggle');
   const chatPanel = document.getElementById('chatPanel');
+  const backdrop = document.getElementById('chatBackdrop');
   const vehicleType = document.getElementById('vehicleType');
   const modelSelect = document.getElementById('modelSelect');
   const serviceSelect = document.getElementById('serviceSelect');
@@ -672,15 +577,38 @@ select {
   const mainWa = document.getElementById('main-wa');
   const customerName = document.getElementById('customerName');
 
-  chatToggle.addEventListener('click', ()=> chatPanel.classList.toggle('open'));
+  // Toggle chat + backdrop
+  function openChat(withPrompt){
+    chatPanel.classList.add('open');
+    backdrop.classList.add('show');
+    if(withPrompt) pushBotMessage(withPrompt);
+  }
+  function closeChat(){
+    chatPanel.classList.remove('open');
+    backdrop.classList.remove('show');
+  }
+
+  chatToggle.addEventListener('click', ()=> {
+    if(chatPanel.classList.contains('open')) closeChat();
+    else openChat("Olá! 😊 Escolha o tipo do veículo, o serviço e o modelo para iniciarmos seu orçamento.");
+  });
+
+  backdrop.addEventListener('click', closeChat);
+
+  // open chat from main CTA
+  if(mainWa) mainWa.addEventListener('click', (e)=>{ 
+    e.preventDefault();
+    openChat("Vamos lá! 😊 Escolha o tipo do veículo, o serviço e o modelo para iniciarmos seu orçamento.");
+    // focus first select for mobile
+    setTimeout(()=> vehicleType.focus(), 220);
+  });
 
   // populate models on type change
   vehicleType.addEventListener('change', (e)=>{
     const v = e.target.value;
     modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
     if(MODELS[v]) MODELS[v].forEach(m => {
-      const opt = document.createElement('option');
-      opt.value = m; opt.textContent = m;
+      const opt = document.createElement('option'); opt.value = m; opt.textContent = m;
       modelSelect.appendChild(opt);
     });
     pushBotMessage(`Você escolheu: ${v || '—'}. Agora selecione o serviço e o modelo.`);
@@ -701,12 +629,27 @@ select {
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
+  // validate before opening WhatsApp
   function openWhatsappFromState(){
-    const tipo = vehicleType.value || 'Não informado';
-    const serv = serviceSelect.value || 'Serviço não escolhido';
-    const modelo = modelSelect.value || 'Modelo não informado';
+    const tipo = vehicleType.value || '';
+    const serv = serviceSelect.value || '';
+    const modelo = modelSelect.value || '';
     const nome = (customerName.value || '').trim();
 
+    // validation
+    if(!tipo || !serv || !modelo){
+      pushBotMessage("Por favor, selecione o Tipo, Serviço e Modelo antes de abrir o WhatsApp.");
+      // small visual shake to indicate missing
+      [vehicleType, serviceSelect, modelSelect].forEach(inp=>{
+        if(inp && !inp.value){
+          inp.style.boxShadow = '0 0 0 3px rgba(255,0,0,0.12)';
+          setTimeout(()=> inp.style.boxShadow = '', 700);
+        }
+      });
+      return;
+    }
+
+    // proceed
     pushUserMessage(`${serv} • ${tipo} • ${modelo}`);
     pushBotMessage('Beleza — vou preparar a mensagem e abrir o WhatsApp.');
 
@@ -717,16 +660,7 @@ select {
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
-if(mainWa) mainWa.addEventListener('click', (e)=>{ 
-    e.preventDefault();
-
-    // abre o chat do bot
-    chatPanel.classList.add('open');
-
-    // envia mensagem automática
-    pushBotMessage("Vamos lá! 😊 Escolha o tipo do veículo, o serviço e o modelo para iniciarmos seu orçamento.");
-});
-
+  sendBtn.addEventListener('click', openWhatsappFromState);
 
   // Contact form -> WhatsApp
   document.getElementById('sendContact').addEventListener('click', () => {
@@ -750,6 +684,10 @@ if(mainWa) mainWa.addEventListener('click', (e)=>{
   // initial small prompts
   setTimeout(()=> pushBotMessage("Escolha o tipo do veículo, serviço e modelo para enviar o orçamento."), 900);
 
+  // small accessibility: close chat with ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeChat();
+  });
 </script>
 </body>
 </html>
